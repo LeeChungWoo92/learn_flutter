@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/01_widget_rule/data/model/profile.dart';
 
-class CreatorProfile extends StatelessWidget {
+class ProfileWidget extends StatelessWidget {
   final void Function(String) onFollowTap;
   final Profile profile;
   final bool isFollow;
 
-  const CreatorProfile({
+  const ProfileWidget({
     super.key,
     required this.profile,
     required this.onFollowTap,

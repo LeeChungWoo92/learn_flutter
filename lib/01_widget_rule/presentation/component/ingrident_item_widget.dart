@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../data/model/ingrident.dart';
 
-class IngridentItem extends StatelessWidget {
+class IngridentItemWidget extends StatelessWidget {
   final Ingrident ingrident;
 
-  const IngridentItem({super.key, required this.ingrident});
+  const IngridentItemWidget({
+    super.key,
+    required this.ingrident,
+  });
 
   @override
   Widget build(BuildContext context) {

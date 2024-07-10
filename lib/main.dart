@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_flutter/01_widget_rule/data/model/ingrident.dart';
 import 'package:learn_flutter/01_widget_rule/data/model/profile.dart';
 import 'package:learn_flutter/01_widget_rule/data/model/recipe.dart';
+import 'package:learn_flutter/01_widget_rule/presentation/component/recipe_link_card_widget.dart';
 
 import '01_widget_rule/presentation/component/profile_widget.dart';
 import '01_widget_rule/presentation/component/ingrident_item_widget.dart';
@@ -73,7 +74,8 @@ class _MainScreenState extends State<MainScreen> {
         //   onFollowTap: _toggleFollow,
         //   isFollow: _isFollow,
         // ),
-        body: RecipeCardWidget(recipe: _recipe,),
+        //body: RecipeCardWidget(recipe: _recipe,),
+        body: const RecipeLinkCardWidget(),
       ),
     );
   }

@@ -63,16 +63,16 @@ class ProfileWidget extends StatelessWidget {
             width: 130,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: isFollow ? Colors.grey : Colors.teal,
+                backgroundColor: isFollow ? Colors.teal : Colors.grey,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
               onPressed: () {
-                onFollowTap.call(isFollow ? 'Follow' : 'UnFollow');
+                onFollowTap.call(isFollow ? 'UnFollow' : 'Follow');
               },
               child: Text(
-                isFollow ? 'Follow' : 'UnFollow',
+                isFollow ? 'UnFollow' : 'Follow',
                 style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,

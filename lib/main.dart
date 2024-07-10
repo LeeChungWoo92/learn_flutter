@@ -69,13 +69,13 @@ class _MainScreenState extends State<MainScreen> {
         // body: IngridentItem(
         //   ingrident: _ingrident,
         // ),
-        // body: CreatorProfile(
-        //   profile: _profile,
-        //   onFollowTap: _toggleFollow,
-        //   isFollow: _isFollow,
-        // ),
+        body: ProfileWidget(
+          profile: _profile,
+          onFollowTap: _toggleFollow,
+          isFollow: _isFollow,
+        ),
         //body: RecipeCardWidget(recipe: _recipe,),
-        body: const RecipeLinkCardWidget(),
+        //body: const RecipeLinkCardWidget(),
       ),
     );
   }

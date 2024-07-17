@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/04_recipe/core/result.dart';
 import 'package:learn_flutter/04_recipe/data/model/recipe.dart';
 import 'package:learn_flutter/04_recipe/data/repository/recipe_repository.dart';
-import 'package:learn_flutter/04_recipe/data/repository/recipe_repository_impl.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/component/recipe_card_widget.dart';
 
 import '../../../03_food_recipe_app/ui/fonts.dart';
 
 class SavedRecipeScreen extends StatelessWidget {
-  final RecipeRepository recipeRepositoryImpl;
+  final RecipeRepository recipeRepository;
 
   const SavedRecipeScreen({
     super.key,
-    required this.recipeRepositoryImpl,
+    required this.recipeRepository,
   });
 
   @override
@@ -26,7 +26,7 @@ class SavedRecipeScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: FutureBuilder<Result<List<Recipe>>>(
-        future: recipeRepositoryImpl.getRecipes(),
+        future: recipeRepository.getRecipes(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -41,7 +41,11 @@ class SavedRecipeScreen extends StatelessWidget {
                   itemCount: result.data.length,
                   itemBuilder: (context, index) {
                     final recipe = result.data[index];
-                    return RecipeCardWidget(recipe: recipe);
+                    return GestureDetector(
+                        onTap: () {
+                          context.push('/recipe_detail', extra: recipe);
+                        },
+                        child: RecipeCardWidget(recipe: recipe));
                   },
                 );
 

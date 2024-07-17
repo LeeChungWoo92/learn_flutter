@@ -1,16 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/04_recipe/data/datasource/recipe_datasource_impl.dart';
+import 'package:learn_flutter/04_recipe/data/model/recipe.dart';
+import 'package:learn_flutter/04_recipe/data/repository/recipe_repository.dart';
 import 'package:learn_flutter/04_recipe/data/repository/recipe_repository_impl.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/home_content_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/notification/notification_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/profile/profile_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_screen.dart';
 
+import '../saved_recipe/saved_recipe_detail_screen.dart';
+
 void main() {
   final recipeDatasourceImpl = RecipeDatasourceImpl();
   final recipeRepositoryImpl = RecipeRepositoryImpl(recipeDatasourceImpl);
 
-  runApp(HomeScreen(recipeRepository: recipeRepositoryImpl));
+  //runApp(HomeScreen(recipeRepository: recipeRepositoryImpl));
+  runApp(MyApp(recipeRepository: recipeRepositoryImpl));
+}
+
+class MyApp extends StatelessWidget {
+  final RecipeRepositoryImpl recipeRepository;
+
+  const MyApp({
+    super.key,
+    required this.recipeRepository,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      routerConfig: GoRouter(
+        initialLocation: '/home',
+        routes: [
+          GoRoute(
+            path: '/home',
+            builder: (context, state) {
+              return HomeScreen(recipeRepository: recipeRepository);
+            },
+          ),
+          GoRoute(
+            path: '/saved_recipe',
+            builder: (context, state) {
+              final recipeRepository = state.extra as RecipeRepository;
+              return SavedRecipeScreen(recipeRepository: recipeRepository);
+            },
+          ),
+          GoRoute(
+            path: '/recipe_detail',
+            builder: (context, state) {
+              final recipe = state.extra as Recipe;
+              return SavedRecipeDetailScreen(recipe: recipe);
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class HomeScreen extends StatefulWidget {
@@ -35,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _screens = [
       const HomeContentScreen(),
-      SavedRecipeScreen(recipeRepositoryImpl: widget.recipeRepository),
+      SavedRecipeScreen(recipeRepository: widget.recipeRepository),
       const NotificationScreen(),
       const ProfileScreen(),
     ];

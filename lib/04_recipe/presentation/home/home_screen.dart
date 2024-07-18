@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:learn_flutter/04_recipe/data/repository/recipe_repository_impl.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/home_content_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/notification/notification_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/profile/profile_screen.dart';
+import 'package:learn_flutter/04_recipe/presentation/saved_recipe/component/saved_recipes_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_screen.dart';
 
 import '../../../router/router.dart';
@@ -23,11 +23,11 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
-  final RecipeRepositoryImpl recipeRepository;
+  final SavedRecipesViewModel viewModel;
 
   const HomeScreen({
     super.key,
-    required this.recipeRepository,
+    required this.viewModel,
   });
 
   @override
@@ -36,7 +36,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-
   late final List<Widget> _screens;
 
   @override
@@ -44,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _screens = [
       const HomeContentScreen(),
-      SavedRecipeScreen(recipeRepository: widget.recipeRepository),
+      SavedRecipeScreen(viewModel: widget.viewModel),
       const NotificationScreen(),
       const ProfileScreen(),
     ];

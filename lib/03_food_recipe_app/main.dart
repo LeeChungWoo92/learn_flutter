@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/03_food_recipe_app/presentaion/sign_in/sign_in_screen.dart';
+import 'package:learn_flutter/03_food_recipe_app/presentaion/sign_up/sign_up_screen.dart';
+import 'package:learn_flutter/03_food_recipe_app/presentaion/splash/splash_screen.dart';
 
 void main() {
   runApp(const MainScreen());
@@ -17,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: Scaffold(
-        body: SignInScreen(),
+        body: SignUpScreen(),
       ),
     );
   }

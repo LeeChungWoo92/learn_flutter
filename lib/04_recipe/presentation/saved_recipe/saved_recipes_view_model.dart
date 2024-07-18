@@ -23,17 +23,13 @@ class SavedRecipesViewModel with ChangeNotifier {
   String? get errorMessage => _errorMessage;
 
   void getRecipes() async {
-    print('get레시피');
     _isLoading = true;
     final data = await _recipeRepository.getRecipes();
     _isLoading = false;
     switch (data) {
       case Success<List<Recipe>>():
         _recipes = data.data;
-        print('레시피');
-        print(_recipes);
       case Error<List<Recipe>>():
-        print('에러발생');
         _errorMessage = '에러발생';
     }
 

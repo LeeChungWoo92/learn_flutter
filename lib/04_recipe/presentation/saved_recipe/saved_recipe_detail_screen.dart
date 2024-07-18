@@ -96,7 +96,8 @@ class SavedRecipeDetailScreen extends StatelessWidget {
                                 width: 30,
                                 height: 30,
                                 decoration: const BoxDecoration(
-                                    color: Colors.white, shape: BoxShape.circle),
+                                    color: Colors.white,
+                                    shape: BoxShape.circle),
                                 child: const ClipOval(
                                     child: Icon(
                                   Icons.bookmark_border,
@@ -122,12 +123,14 @@ class SavedRecipeDetailScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text(
-                      '(13k Reviews)',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
+                    const Material(
+                      child: Text(
+                        '(13k Reviews)',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
                     ),
                   ],

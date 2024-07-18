@@ -45,7 +45,8 @@ class SavedRecipeScreen extends StatelessWidget {
                         onTap: () {
                           context.push('/recipe_detail', extra: recipe);
                         },
-                        child: RecipeCardWidget(recipe: recipe));
+                        child: Hero(tag: recipe.imageUrl,
+                        child: RecipeCardWidget(recipe: recipe)));
                   },
                 );
 

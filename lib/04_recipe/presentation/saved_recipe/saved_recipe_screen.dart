@@ -4,13 +4,11 @@ import 'package:learn_flutter/04_recipe/presentation/saved_recipe/component/reci
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
 
 import '../../../03_food_recipe_app/ui/fonts.dart';
+import '../../core/change_notifier_provider.dart';
 
 class SavedRecipeScreen extends StatelessWidget {
-  final SavedRecipesViewModel viewModel;
-
   const SavedRecipeScreen({
     super.key,
-    required this.viewModel,
   });
 
   @override
@@ -23,11 +21,19 @@ class SavedRecipeScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: recipeList(),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          left: 30,
+          right: 30,
+        ),
+        child: recipeList(context),
+      ),
     );
   }
 
-  Widget recipeList() {
+  Widget recipeList(BuildContext context) {
+    final viewModel =
+        ChangeNotifierProvider.of<SavedRecipesViewModel>(context).value;
     return ListenableBuilder(
       listenable: viewModel,
       builder: (BuildContext context, Widget? child) {

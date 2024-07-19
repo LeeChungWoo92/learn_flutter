@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter/04_recipe/core/change_notifier_provider.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/home_content_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/notification/notification_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/profile/profile_screen.dart';
@@ -23,11 +24,9 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
-  final SavedRecipesViewModel viewModel;
 
   const HomeScreen({
     super.key,
-    required this.viewModel,
   });
 
   @override
@@ -36,21 +35,26 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-  late final List<Widget> _screens;
 
   @override
   void initState() {
     super.initState();
-    _screens = [
-      const HomeContentScreen(),
-      SavedRecipeScreen(viewModel: widget.viewModel),
-      const NotificationScreen(),
-      const ProfileScreen(),
-    ];
   }
 
   @override
   Widget build(BuildContext context) {
+    //final viewModel = ChangeNotifierProvider.of(context).value;
+    final viewModel = ChangeNotifierProvider.of<SavedRecipesViewModel>(context).value;
+    final List<Widget> _screens = [
+      const HomeContentScreen(),
+      //SavedRecipeScreen(viewModel: widget.viewModel),
+      ChangeNotifierProvider(
+        value: viewModel,
+        child: const SavedRecipeScreen(),
+      ),
+      const NotificationScreen(),
+      const ProfileScreen(),
+    ];
     return MaterialApp(
       home: Scaffold(
         body: _screens[_selectedIndex],

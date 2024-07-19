@@ -17,4 +17,21 @@ class RecipeRepositoryImpl implements RecipeRepository {
       return Result.error(e.toString());
     }
   }
+
+  @override
+  Future<Result<List<Recipe>>> getSearchRecipes(String foodName) async {
+    final data = await getRecipes();
+    if (data is Success<List<Recipe>>) {
+      final recipes = data.data;
+      final searchResults = recipes
+          .where((recipe) =>
+              recipe.foodName.toLowerCase().contains(foodName.toLowerCase()))
+          .toList();
+      return Result.success(searchResults);
+    } else if (data is Error<List<Recipe>>) {
+      return Result.error(data.e);
+    } else {
+      return const Result.error('Unknown error');
+    }
+  }
 }

@@ -25,7 +25,7 @@ final router = GoRouter(
         final viewModel = SavedRecipesViewModel(_repository);
         return ChangeNotifierProvider<SavedRecipesViewModel>(
           value: viewModel,
-          child: HomeScreen(),
+          child: const HomeScreen(),
         );
       },
     ),

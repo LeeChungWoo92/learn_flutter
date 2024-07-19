@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:learn_flutter/01_widget_rule/data/model/ingrident.dart';
 import 'package:learn_flutter/01_widget_rule/data/model/profile.dart';
-import 'package:learn_flutter/01_widget_rule/data/model/recipe.dart';
-import 'package:learn_flutter/01_widget_rule/presentation/component/recipe_link_card_widget.dart';
 
 import '01_widget_rule/presentation/component/profile_widget.dart';
-import '01_widget_rule/presentation/component/ingrident_item_widget.dart';
-import '01_widget_rule/presentation/component/recipe_card_widget.dart';
 
 void main() {
   runApp(const MainScreen());
@@ -20,12 +15,12 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final _ingrident = const Ingrident(
-    imageUrl:
-    'https://cdn.pixabay.com/photo/2019/07/03/20/56/tomatoes-4315442_1280.png',
-    name: 'Tomatos',
-    weight: '500',
-  );
+  // final _ingrident = const Ingrident(
+  //   imageUrl:
+  //   'https://cdn.pixabay.com/photo/2019/07/03/20/56/tomatoes-4315442_1280.png',
+  //   name: 'Tomatos',
+  //   weight: '500',
+  // );
 
   final _profile = const Profile(
     imageUrl:
@@ -34,12 +29,12 @@ class _MainScreenState extends State<MainScreen> {
     locationName: 'Lagos,Nigeria',
   );
 
-  final _recipe = const Recipe(
-      imageUrl: 'https://cdn.pixabay.com/photo/2019/10/17/04/42/food-4555980_1280.jpg',
-      foodName: '수플레 팬케이크',
-      chefName: 'By Lee Chung Woo',
-      grade: 5.0,
-      cookingTime: '20');
+  // final _recipe = const Recipe(
+  //     imageUrl: 'https://cdn.pixabay.com/photo/2019/10/17/04/42/food-4555980_1280.jpg',
+  //     foodName: '수플레 팬케이크',
+  //     chefName: 'By Lee Chung Woo',
+  //     grade: 5.0,
+  //     cookingTime: '20');
 
 
   bool _isFollow = false;

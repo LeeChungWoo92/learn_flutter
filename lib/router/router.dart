@@ -5,6 +5,7 @@ import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_screen.
 import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
 
+import '../04_recipe/core/change_notifier_provider.dart';
 import '../04_recipe/data/datasource/recipe_datasource_impl.dart';
 import '../04_recipe/data/model/recipe.dart';
 import '../04_recipe/data/repository/recipe_repository_impl.dart';
@@ -22,14 +23,20 @@ final router = GoRouter(
       path: '/home',
       builder: (context, state) {
         final viewModel = SavedRecipesViewModel(_repository);
-        return HomeScreen(viewModel: viewModel);
+        return ChangeNotifierProvider<SavedRecipesViewModel>(
+          value: viewModel,
+          child: HomeScreen(),
+        );
       },
     ),
     GoRoute(
       path: '/saved_recipe',
       builder: (context, state) {
         final viewModel = SavedRecipesViewModel(_repository);
-        return SavedRecipeScreen(viewModel: viewModel);
+        return ChangeNotifierProvider<SavedRecipesViewModel>(
+          value: viewModel,
+          child: const SavedRecipeScreen(),
+        );
       },
     ),
     GoRoute(

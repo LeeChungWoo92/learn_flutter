@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../ui/color_styles.dart';
-import '../../ui/fonts.dart';
+import '../../../03_food_recipe_app/ui/color_styles.dart';
+import '../../../03_food_recipe_app/ui/fonts.dart';
 
 class InputFieldSearch extends StatelessWidget {
   final bool isReadOnly;

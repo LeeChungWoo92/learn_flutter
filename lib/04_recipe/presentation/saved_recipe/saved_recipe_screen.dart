@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/component/recipe_card_widget.dart';
-import 'package:learn_flutter/04_recipe/presentation/saved_recipe/component/saved_recipes_view_model.dart';
+import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
 
 import '../../../03_food_recipe_app/ui/fonts.dart';
 

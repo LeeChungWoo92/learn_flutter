@@ -1,6 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/03_food_recipe_app/presentaion/sign_up/sign_up_screen.dart';
 import 'package:learn_flutter/03_food_recipe_app/presentaion/splash/splash_screen.dart';
+import 'package:learn_flutter/04_recipe/data/datasource/ingrident_datasource_impl.dart';
+import 'package:learn_flutter/04_recipe/data/repository/ingrident_repository_impl.dart';
+import 'package:learn_flutter/04_recipe/data/repository/ingrident_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
@@ -15,6 +18,9 @@ import '../04_recipe/presentation/saved_recipe/saved_recipe_screen.dart';
 
 final _dataource = RecipeDatasourceImpl();
 final _repository = RecipeRepositoryImpl(_dataource);
+
+final _ingridentDatasource = IngridentDatasourceImpl();
+final _ingridentRepository = IngridentRepositoryImpl(_ingridentDatasource);
 
 final router = GoRouter(
   initialLocation: '/sign_up',
@@ -43,7 +49,11 @@ final router = GoRouter(
       path: '/recipe_detail',
       builder: (context, state) {
         final recipe = state.extra as Recipe;
-        return SavedRecipeDetailScreen(recipe: recipe);
+        final viewModel = IngridentViewModel(_ingridentRepository);
+        return ChangeNotifierProvider<IngridentViewModel>(
+          value: viewModel,
+          child: SavedRecipeDetailScreen(recipe: recipe),
+        );
       },
     ),
     GoRoute(

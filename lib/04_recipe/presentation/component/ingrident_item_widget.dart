@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/model/ingrident.dart';
+import '../../../01_widget_rule/data/model/ingrident.dart';
 
 class IngridentItemWidget extends StatelessWidget {
   final Ingrident ingrident;

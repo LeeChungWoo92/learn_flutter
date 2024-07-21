@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/01_widget_rule/data/model/profile.dart';
 
-import '01_widget_rule/presentation/component/profile_widget.dart';
+import '04_recipe/presentation/component/profile_widget.dart';
 
 void main() {
   runApp(const MainScreen());

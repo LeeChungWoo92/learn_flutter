@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     //final viewModel = ChangeNotifierProvider.of(context).value;
     final viewModel = ChangeNotifierProvider.of<SavedRecipesViewModel>(context).value;
-    final List<Widget> _screens = [
+    final List<Widget> screens = [
       const HomeContentScreen(),
       //SavedRecipeScreen(viewModel: widget.viewModel),
       ChangeNotifierProvider(
@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
     return MaterialApp(
       home: Scaffold(
-        body: _screens[_selectedIndex],
+        body: screens[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,

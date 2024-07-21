@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/04_recipe/data/model/recipe.dart';
+import 'package:learn_flutter/04_recipe/presentation/component/profile_widget.dart';
+
+import '../../../01_widget_rule/data/model/profile.dart';
 
 class SavedRecipeDetailScreen extends StatelessWidget {
   final Recipe recipe;
@@ -11,6 +14,20 @@ class SavedRecipeDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _profile = const Profile(
+      imageUrl:
+          'https://cdn.pixabay.com/photo/2020/06/25/16/25/micky-mouse-5340128_1280.jpg',
+      name: '미키마우스',
+      locationName: 'Lagos,Nigeria',
+    );
+
+    bool _isFollow = false;
+
+    void _toggleFollow(String message) {
+      _isFollow = !_isFollow;
+      print(message);
+    }
+
     return Scaffold(
       appBar: AppBar(),
       body: Hero(
@@ -136,6 +153,14 @@ class SavedRecipeDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: ProfileWidget(
+                    profile: _profile,
+                    onFollowTap: _toggleFollow,
+                    isFollow: _isFollow),
+              )
             ],
           ),
         ),

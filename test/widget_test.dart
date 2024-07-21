@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:learn_flutter/01_widget_rule/data/model/profile.dart';
-import 'package:learn_flutter/01_widget_rule/presentation/component/profile_widget.dart';
+import 'package:learn_flutter/04_recipe/presentation/component/profile_widget.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
 void main() {

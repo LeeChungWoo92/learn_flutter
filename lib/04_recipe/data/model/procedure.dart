@@ -5,11 +5,11 @@ part 'procedure.freezed.dart';
 part 'procedure.g.dart';
 
 @freezed
-class Procedure with _$Procudure {
+class Procedure with _$Procedure {
   const factory Procedure({
     required String title,
     required String content,
-  }) = Procedure;
+  }) = _Procedure;
   
   factory Procedure.fromJson(Map<String, Object?> json) => _$ProcedureFromJson(json);
 }

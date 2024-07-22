@@ -2,8 +2,10 @@ import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/03_food_recipe_app/presentaion/sign_up/sign_up_screen.dart';
 import 'package:learn_flutter/03_food_recipe_app/presentaion/splash/splash_screen.dart';
 import 'package:learn_flutter/04_recipe/data/datasource/ingrident_datasource_impl.dart';
+import 'package:learn_flutter/04_recipe/data/datasource/procedure_datasource_impl.dart';
 import 'package:learn_flutter/04_recipe/data/repository/ingrident_repository_impl.dart';
-import 'package:learn_flutter/04_recipe/data/repository/ingrident_view_model.dart';
+import 'package:learn_flutter/04_recipe/data/repository/procedure_repository_impl.dart';
+import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
@@ -21,6 +23,9 @@ final _repository = RecipeRepositoryImpl(_dataource);
 
 final _ingridentDatasource = IngridentDatasourceImpl();
 final _ingridentRepository = IngridentRepositoryImpl(_ingridentDatasource);
+
+final _procedureDatasource = ProcedureDatasourceImpl();
+final _procedureRepository = ProcedureRepositoryImpl(_procedureDatasource);
 
 final router = GoRouter(
   initialLocation: '/sign_up',
@@ -49,8 +54,11 @@ final router = GoRouter(
       path: '/recipe_detail',
       builder: (context, state) {
         final recipe = state.extra as Recipe;
-        final viewModel = IngridentViewModel(_ingridentRepository);
-        return ChangeNotifierProvider<IngridentViewModel>(
+        final viewModel = SavedRecipeDetailViewModel(
+          _ingridentRepository,
+          _procedureRepository,
+        );
+        return ChangeNotifierProvider<SavedRecipeDetailViewModel>(
           value: viewModel,
           child: SavedRecipeDetailScreen(recipe: recipe),
         );

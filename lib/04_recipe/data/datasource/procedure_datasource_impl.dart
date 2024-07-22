@@ -30,6 +30,11 @@ class ProcedureDatasourceImpl implements ProcedureDatasource {
         content:
         'Lorem Ipsum tempor incididunt ut labore et dolore,in voluptate velit esse cillum dolore eu fugiat nulla pariatur? Tempor incididunt ut labore et dolore,in voluptate velit esse cillum dolore eu fugiat nulla pariatur?',
       ),
+      const Procedure(
+        title: 'Step 6',
+        content:
+        'Lorem Ipsum tempor incididunt ut labore et dolore,in voluptate velit esse cillum dolore eu fugiat nulla pariatur?',
+      ),
     ];
   }
 }

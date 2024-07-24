@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/component/recipe_card_widget.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../03_food_recipe_app/ui/fonts.dart';
-import '../../core/change_notifier_provider.dart';
 
 class SavedRecipeScreen extends StatelessWidget {
   const SavedRecipeScreen({
@@ -32,31 +32,23 @@ class SavedRecipeScreen extends StatelessWidget {
   }
 
   Widget recipeList(BuildContext context) {
-    final viewModel =
-        ChangeNotifierProvider.of<SavedRecipesViewModel>(context).value;
-    return ListenableBuilder(
-      listenable: viewModel,
-      builder: (BuildContext context, Widget? child) {
-        final recipes = viewModel.recipes;
-
-        return ListView.builder(
-          itemCount: recipes.length,
-          itemBuilder: (context, index) {
-            final recipe = recipes[index];
-            if (viewModel.isLoading) {
-              const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            return GestureDetector(
-                onTap: () {
-                  context.push('/recipe_detail', extra: recipe);
-                },
-                child: Hero(
-                    tag: recipe.imageUrl,
-                    child: RecipeCardWidget(recipe: recipe)));
-          },
-        );
+    final viewModel = context.watch<SavedRecipesViewModel>();
+    final recipes = viewModel.recipes;
+    return ListView.builder(
+      itemCount: recipes.length,
+      itemBuilder: (context, index) {
+        final recipe = recipes[index];
+        if (viewModel.isLoading) {
+          const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return GestureDetector(
+            onTap: () {
+              context.push('/recipe_detail', extra: recipe);
+            },
+            child: Hero(
+                tag: recipe.imageUrl, child: RecipeCardWidget(recipe: recipe)));
       },
     );
   }

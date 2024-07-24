@@ -9,8 +9,8 @@ import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_d
 import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
+import 'package:provider/provider.dart';
 
-import '../04_recipe/core/change_notifier_provider.dart';
 import '../04_recipe/data/datasource/recipe_datasource_impl.dart';
 import '../04_recipe/data/model/recipe.dart';
 import '../04_recipe/data/repository/recipe_repository_impl.dart';
@@ -35,7 +35,7 @@ final router = GoRouter(
       builder: (context, state) {
         final viewModel = SavedRecipesViewModel(_repository);
         return ChangeNotifierProvider<SavedRecipesViewModel>(
-          value: viewModel,
+          create: (context) =>viewModel,
           child: const HomeScreen(),
         );
       },
@@ -45,7 +45,7 @@ final router = GoRouter(
       builder: (context, state) {
         final viewModel = SavedRecipesViewModel(_repository);
         return ChangeNotifierProvider<SavedRecipesViewModel>(
-          value: viewModel,
+          create: (context) => viewModel,
           child: const SavedRecipeScreen(),
         );
       },
@@ -59,7 +59,7 @@ final router = GoRouter(
           _procedureRepository,
         );
         return ChangeNotifierProvider<SavedRecipeDetailViewModel>(
-          value: viewModel,
+          create: (context) =>viewModel,
           child: SavedRecipeDetailScreen(recipe: recipe),
         );
       },

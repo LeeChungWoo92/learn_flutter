@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:learn_flutter/04_recipe/core/change_notifier_provider.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/home_content_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/notification/notification_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/profile/profile_screen.dart';
-import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_screen.dart';
 
 import '../../../router/router.dart';
@@ -24,7 +22,6 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
-
   const HomeScreen({
     super.key,
   });
@@ -43,15 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //final viewModel = ChangeNotifierProvider.of(context).value;
-    final viewModel = ChangeNotifierProvider.of<SavedRecipesViewModel>(context).value;
     final List<Widget> screens = [
       const HomeContentScreen(),
-      //SavedRecipeScreen(viewModel: widget.viewModel),
-      ChangeNotifierProvider(
-        value: viewModel,
-        child: const SavedRecipeScreen(),
-      ),
+      const SavedRecipeScreen(),
       const NotificationScreen(),
       const ProfileScreen(),
     ];

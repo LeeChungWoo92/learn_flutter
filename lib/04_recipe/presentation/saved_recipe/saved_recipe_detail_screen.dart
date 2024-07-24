@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/03_food_recipe_app/ui/color_styles.dart';
 import 'package:learn_flutter/03_food_recipe_app/ui/fonts.dart';
-import 'package:learn_flutter/04_recipe/core/change_notifier_provider.dart';
 import 'package:learn_flutter/04_recipe/data/model/recipe.dart';
 import 'package:learn_flutter/04_recipe/presentation/component/ingrident_item_widget.dart';
 import 'package:learn_flutter/04_recipe/presentation/component/procedure_item_widget.dart';
 import 'package:learn_flutter/04_recipe/presentation/component/profile_widget.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/component/recipe_card_widget.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../../01_widget_rule/data/model/profile.dart';
 
@@ -147,108 +147,96 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
   }
 
   Widget ingredientList() {
-    final viewModel =
-        ChangeNotifierProvider.of<SavedRecipeDetailViewModel>(context).value;
+    final viewModel = context.watch<SavedRecipeDetailViewModel>();
+    final ingridents = viewModel.ingrident;
 
-    return ListenableBuilder(
-      listenable: viewModel,
-      builder: (BuildContext context, Widget? child) {
-        final ingridents = viewModel.ingrident;
-        return Column(
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Image.asset('assets/ic_food.png'),
-                    const SizedBox(width: 5),
-                    Text('1 serve',
-                        style: Fonts.smallerTextRegular.copyWith(
-                          color: ColorStyles.gray3Color,
-                        )),
-                  ],
-                ),
-                Text('${viewModel.ingrident.length} Items',
+                Image.asset('assets/ic_food.png'),
+                const SizedBox(width: 5),
+                Text('1 serve',
                     style: Fonts.smallerTextRegular.copyWith(
                       color: ColorStyles.gray3Color,
                     )),
               ],
             ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: ingridents.length,
-                itemBuilder: (context, index) {
-                  final ingrident = ingridents[index];
-                  if (viewModel.isLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: IngridentItemWidget(ingrident: ingrident),
-                  );
-                },
-              ),
-            ),
+            Text('${viewModel.ingrident.length} Items',
+                style: Fonts.smallerTextRegular.copyWith(
+                  color: ColorStyles.gray3Color,
+                )),
           ],
-        );
-      },
+        ),
+        const SizedBox(height: 20),
+        Expanded(
+          child: ListView.builder(
+            itemCount: ingridents.length,
+            itemBuilder: (context, index) {
+              final ingrident = ingridents[index];
+              if (viewModel.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: IngridentItemWidget(ingrident: ingrident),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
   Widget proceduretList() {
-    final viewModel =
-        ChangeNotifierProvider.of<SavedRecipeDetailViewModel>(context).value;
+    final viewModel = context.watch<SavedRecipeDetailViewModel>();
+    final procedures = viewModel.procedure;
 
-    return ListenableBuilder(
-      listenable: viewModel,
-      builder: (BuildContext context, Widget? child) {
-        final procedures = viewModel.procedure;
-        return Column(
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Image.asset('assets/ic_food.png'),
-                    const SizedBox(width: 5),
-                    Text('1 serve',
-                        style: Fonts.smallerTextRegular.copyWith(
-                          color: ColorStyles.gray3Color,
-                        )),
-                  ],
-                ),
-                Text('${viewModel.procedure.length} Steps',
+                Image.asset('assets/ic_food.png'),
+                const SizedBox(width: 5),
+                Text('1 serve',
                     style: Fonts.smallerTextRegular.copyWith(
                       color: ColorStyles.gray3Color,
                     )),
               ],
             ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: procedures.length,
-                itemBuilder: (context, index) {
-                  final procedure = procedures[index];
-                  if (viewModel.isLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: ProcedureItemWidget(procedure: procedure),
-                  );
-                },
-              ),
-            ),
+            Text('${viewModel.procedure.length} Steps',
+                style: Fonts.smallerTextRegular.copyWith(
+                  color: ColorStyles.gray3Color,
+                )),
           ],
-        );
-      },
+        ),
+        const SizedBox(height: 20),
+        Expanded(
+          child: ListView.builder(
+            itemCount: procedures.length,
+            itemBuilder: (context, index) {
+              final procedure = procedures[index];
+              if (viewModel.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: ProcedureItemWidget(procedure: procedure),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_flutter/04_recipe/core/result.dart';
 import 'package:learn_flutter/04_recipe/data/model/recipe.dart';
 import 'package:learn_flutter/04_recipe/data/repository/recipe_repository.dart';
+import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_ui_state.dart';
 
 class SavedRecipesViewModel with ChangeNotifier {
   final RecipeRepository _recipeRepository;
@@ -10,27 +11,19 @@ class SavedRecipesViewModel with ChangeNotifier {
     getRecipes();
   }
 
-  List<Recipe> _recipes = [];
+  SavedRecipesUiState _state = const SavedRecipesUiState();
 
-  List<Recipe> get recipes => List.unmodifiable(_recipes);
-
-  bool _isLoading = false;
-
-  bool get isLoading => _isLoading;
-
-  String? _errorMessage;
-
-  String? get errorMessage => _errorMessage;
+  SavedRecipesUiState get state => _state;
 
   void getRecipes() async {
-    _isLoading = true;
-    final data = await _recipeRepository.getRecipes();
-    _isLoading = false;
-    switch (data) {
+    _state = state.copyWith(isLoading: true);
+    final result = await _recipeRepository.getRecipes();
+    _state = state.copyWith(isLoading: false);
+    switch (result) {
       case Success<List<Recipe>>():
-        _recipes = data.data;
+        _state = state.copyWith(recipe: result.data);
       case Error<List<Recipe>>():
-        _errorMessage = '에러발생';
+        _state = state.copyWith(errorMessage: '에러발생');
     }
 
     notifyListeners();

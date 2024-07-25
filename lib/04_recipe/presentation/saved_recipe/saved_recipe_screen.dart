@@ -33,12 +33,12 @@ class SavedRecipeScreen extends StatelessWidget {
 
   Widget recipeList(BuildContext context) {
     final viewModel = context.watch<SavedRecipesViewModel>();
-    final recipes = viewModel.recipes;
+    final recipes = viewModel.state.recipe;
     return ListView.builder(
       itemCount: recipes.length,
       itemBuilder: (context, index) {
         final recipe = recipes[index];
-        if (viewModel.isLoading) {
+        if (viewModel.state.isLoading) {
           const Center(
             child: CircularProgressIndicator(),
           );

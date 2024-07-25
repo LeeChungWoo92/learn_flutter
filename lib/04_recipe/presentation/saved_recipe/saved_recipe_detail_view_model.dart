@@ -4,6 +4,7 @@ import 'package:learn_flutter/04_recipe/core/result.dart';
 import 'package:learn_flutter/04_recipe/data/model/procedure.dart';
 import 'package:learn_flutter/04_recipe/data/repository/ingrident_repository.dart';
 import 'package:learn_flutter/04_recipe/data/repository/procedure_repository.dart';
+import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_ui_state.dart';
 
 class SavedRecipeDetailViewModel with ChangeNotifier {
   final IngridentRepository _ingridentRepository;
@@ -17,45 +18,32 @@ class SavedRecipeDetailViewModel with ChangeNotifier {
     getProcedures();
   }
 
-  List<Ingrident> _ingrident = [];
+  SavedRecipeDetailUiState _state = const SavedRecipeDetailUiState();
 
-  List<Ingrident> get ingrident => List.unmodifiable(_ingrident);
-
-  List<Procedure> _procedure = [];
-
-  List<Procedure> get procedure => List.unmodifiable(_procedure);
-
-  bool _isLoading = false;
-
-  bool get isLoading => _isLoading;
-
-  String? _errorMessage;
-
-  String? get errorMessage => _errorMessage;
+  SavedRecipeDetailUiState get state => _state;
 
   void getIngridents() async {
-    _isLoading = true;
-    final data = await _ingridentRepository.getIngridents();
-    _isLoading = false;
-    switch (data) {
+    _state = state.copyWith(isLoading: true);
+    final result = await _ingridentRepository.getIngridents();
+
+    switch (result) {
       case Success<List<Ingrident>>():
-        _ingrident = data.data;
+        _state = state.copyWith(ingrident: result.data, isLoading: false);
       case Error<List<Ingrident>>():
-        _errorMessage = '에러발생';
+        _state = state.copyWith(errorMessage: '에러발생', isLoading: false);
     }
 
     notifyListeners();
   }
 
   void getProcedures() async {
-    _isLoading = true;
-    final data = await _procedureRepository.getProcedures();
-    _isLoading = false;
-    switch (data) {
+    _state = state.copyWith(isLoading: true);
+    final result = await _procedureRepository.getProcedures();
+    switch (result) {
       case Success<List<Procedure>>():
-        _procedure = data.data;
+        _state = state.copyWith(procedure: result.data, isLoading: false);
       case Error<List<Procedure>>():
-        _errorMessage = '에러발생';
+        _state = state.copyWith(errorMessage: '에러발생', isLoading: false);
     }
 
     notifyListeners();

@@ -148,7 +148,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
 
   Widget ingredientList() {
     final viewModel = context.watch<SavedRecipeDetailViewModel>();
-    final ingridents = viewModel.ingrident;
+    final ingridents = viewModel.state.ingrident;
 
     return Column(
       children: [
@@ -165,7 +165,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
                     )),
               ],
             ),
-            Text('${viewModel.ingrident.length} Items',
+            Text('${viewModel.state.ingrident.length} Items',
                 style: Fonts.smallerTextRegular.copyWith(
                   color: ColorStyles.gray3Color,
                 )),
@@ -177,7 +177,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
             itemCount: ingridents.length,
             itemBuilder: (context, index) {
               final ingrident = ingridents[index];
-              if (viewModel.isLoading) {
+              if (viewModel.state.isLoading) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
@@ -195,7 +195,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
 
   Widget proceduretList() {
     final viewModel = context.watch<SavedRecipeDetailViewModel>();
-    final procedures = viewModel.procedure;
+    final procedures = viewModel.state.procedure;
 
     return Column(
       children: [
@@ -212,7 +212,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
                     )),
               ],
             ),
-            Text('${viewModel.procedure.length} Steps',
+            Text('${viewModel.state.procedure.length} Steps',
                 style: Fonts.smallerTextRegular.copyWith(
                   color: ColorStyles.gray3Color,
                 )),
@@ -224,7 +224,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
             itemCount: procedures.length,
             itemBuilder: (context, index) {
               final procedure = procedures[index];
-              if (viewModel.isLoading) {
+              if (viewModel.state.isLoading) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );

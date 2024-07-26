@@ -70,7 +70,10 @@ class SearchRecipesScreen extends StatelessWidget {
               );
             }
 
-            return RecipeCardWidget(recipe: recipe);
+            return RecipeCardWidget(
+              recipe: recipe,
+              isVisibleDetailUi: false,
+            );
           },
         );
       },

@@ -3,10 +3,12 @@ import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
 
 class RecipeCardWidget extends StatelessWidget {
   final Recipe recipe;
+  final bool isVisibleDetailUi;
 
   const RecipeCardWidget({
     super.key,
     required this.recipe,
+    this.isVisibleDetailUi = true
   });
 
   @override
@@ -90,35 +92,38 @@ class RecipeCardWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                bottom: 12,
-                right: 8,
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.timer_outlined,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      '${recipe.cookingTime} min',
-                      style: const TextStyle(
-                        fontSize: 14,
+              Visibility(
+                visible: isVisibleDetailUi,
+                child: Positioned(
+                  bottom: 12,
+                  right: 8,
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.timer_outlined,
                         color: Colors.white,
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
-                        width: 30,
-                        height: 30,
-                        decoration: const BoxDecoration(
-                            color: Colors.white, shape: BoxShape.circle),
-                        child: const ClipOval(
-                            child: Icon(
-                          Icons.bookmark_border,
-                          color: Colors.green,
-                        )))
-                  ],
+                      const SizedBox(width: 10),
+                      Text(
+                        '${recipe.cookingTime} min',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Container(
+                          width: 30,
+                          height: 30,
+                          decoration: const BoxDecoration(
+                              color: Colors.white, shape: BoxShape.circle),
+                          child: const ClipOval(
+                              child: Icon(
+                            Icons.bookmark_border,
+                            color: Colors.green,
+                          )))
+                    ],
+                  ),
                 ),
               ),
             ],

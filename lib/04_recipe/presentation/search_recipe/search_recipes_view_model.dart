@@ -35,13 +35,13 @@ class SearchRecipesViewModel with ChangeNotifier {
 
   void getSearchRecipes(String foodName) async {
     _state = state.copyWith(isLoading: true);
+    notifyListeners();
     final result = await _searchRecipeUseCase.execute(foodName);
-    _state = state.copyWith(isLoading: false);
     switch (result) {
       case Success<List<Recipe>>():
-        _state = state.copyWith(recipe: result.data);
+        _state = state.copyWith(recipe: result.data, isLoading: false);
       case Error<List<Recipe>>():
-        _state = state.copyWith(errorMessage: '에러발생');
+        _state = state.copyWith(errorMessage: '에러발생', isLoading: false);
     }
 
     notifyListeners();

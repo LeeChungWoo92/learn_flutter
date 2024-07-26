@@ -8,12 +8,6 @@ class GetRecipeUseCase {
   GetRecipeUseCase(this._recipeRepository);
 
   Future<Result<List<Recipe>>> execute() async {
-    final results = await _recipeRepository.getRecipes();
-    switch (results) {
-      case Success<List<Recipe>>():
-        return Result.success(results.data);
-      case Error<List<Recipe>>():
-        return const Result.error('에러발생');
-    }
+    return await _recipeRepository.getRecipes();
   }
 }

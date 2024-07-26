@@ -6,6 +6,7 @@ import 'package:learn_flutter/04_recipe/data/datasource/procedure_datasource_imp
 import 'package:learn_flutter/04_recipe/data/repository/ingrident_repository_impl.dart';
 import 'package:learn_flutter/04_recipe/data/repository/procedure_repository_impl.dart';
 import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
+import 'package:learn_flutter/04_recipe/domain/use_case/get_recipe_use_case.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_view_model.dart';
@@ -26,6 +27,7 @@ final _ingridentRepository = IngridentRepositoryImpl(_ingridentDatasource);
 
 final _procedureDatasource = ProcedureDatasourceImpl();
 final _procedureRepository = ProcedureRepositoryImpl(_procedureDatasource);
+final _getRecipeUseCase = GetRecipeUseCase(_repository);
 
 final router = GoRouter(
   initialLocation: '/sign_up',
@@ -33,7 +35,7 @@ final router = GoRouter(
     GoRoute(
       path: '/home',
       builder: (context, state) {
-        final viewModel = SavedRecipesViewModel(_repository);
+        final viewModel = SavedRecipesViewModel(_getRecipeUseCase);
         return ChangeNotifierProvider<SavedRecipesViewModel>(
           create: (context) =>viewModel,
           child: const HomeScreen(),
@@ -43,7 +45,7 @@ final router = GoRouter(
     GoRoute(
       path: '/saved_recipe',
       builder: (context, state) {
-        final viewModel = SavedRecipesViewModel(_repository);
+        final viewModel = SavedRecipesViewModel(_getRecipeUseCase);
         return ChangeNotifierProvider<SavedRecipesViewModel>(
           create: (context) => viewModel,
           child: const SavedRecipeScreen(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/03_food_recipe_app/ui/color_styles.dart';
 import 'package:learn_flutter/03_food_recipe_app/ui/fonts.dart';
-import 'package:learn_flutter/04_recipe/data/model/recipe.dart';
+import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
 import 'package:learn_flutter/04_recipe/presentation/component/ingrident_item_widget.dart';
 import 'package:learn_flutter/04_recipe/presentation/component/procedure_item_widget.dart';
 import 'package:learn_flutter/04_recipe/presentation/component/profile_widget.dart';

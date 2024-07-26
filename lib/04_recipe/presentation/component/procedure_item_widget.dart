@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/03_food_recipe_app/ui/color_styles.dart';
 import 'package:learn_flutter/03_food_recipe_app/ui/fonts.dart';
-import 'package:learn_flutter/04_recipe/data/model/procedure.dart';
+import 'package:learn_flutter/04_recipe/domain/model/procedure.dart';
 
 class ProcedureItemWidget extends StatelessWidget {
   final Procedure procedure;

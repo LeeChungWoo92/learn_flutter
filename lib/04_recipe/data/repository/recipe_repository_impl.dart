@@ -1,7 +1,7 @@
 import 'package:learn_flutter/04_recipe/core/result.dart';
 import 'package:learn_flutter/04_recipe/data/datasource/recipe_datasource.dart';
-import 'package:learn_flutter/04_recipe/data/model/recipe.dart';
-import 'package:learn_flutter/04_recipe/data/repository/recipe_repository.dart';
+import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
+import 'package:learn_flutter/04_recipe/domain/repository/recipe_repository.dart';
 
 class RecipeRepositoryImpl implements RecipeRepository {
   RecipeDatasource recipeDatasource;

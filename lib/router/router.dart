@@ -5,6 +5,7 @@ import 'package:learn_flutter/04_recipe/data/datasource/ingrident_datasource_imp
 import 'package:learn_flutter/04_recipe/data/datasource/procedure_datasource_impl.dart';
 import 'package:learn_flutter/04_recipe/data/repository/ingrident_repository_impl.dart';
 import 'package:learn_flutter/04_recipe/data/repository/procedure_repository_impl.dart';
+import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_view_model.dart';
@@ -12,7 +13,6 @@ import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_
 import 'package:provider/provider.dart';
 
 import '../04_recipe/data/datasource/recipe_datasource_impl.dart';
-import '../04_recipe/data/model/recipe.dart';
 import '../04_recipe/data/repository/recipe_repository_impl.dart';
 import '../04_recipe/presentation/home/home_screen.dart';
 import '../04_recipe/presentation/saved_recipe/saved_recipe_detail_screen.dart';

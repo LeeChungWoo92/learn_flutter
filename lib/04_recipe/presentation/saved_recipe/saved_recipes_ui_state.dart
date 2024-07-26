@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:learn_flutter/04_recipe/data/model/recipe.dart';
+import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
+import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
 
 part 'saved_recipes_ui_state.freezed.dart';
 

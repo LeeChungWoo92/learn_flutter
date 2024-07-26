@@ -1,5 +1,5 @@
 import 'package:learn_flutter/04_recipe/data/datasource/recipe_datasource.dart';
-import 'package:learn_flutter/04_recipe/data/model/recipe.dart';
+import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
 
 class RecipeDatasourceImpl implements RecipeDatasource {
   @override

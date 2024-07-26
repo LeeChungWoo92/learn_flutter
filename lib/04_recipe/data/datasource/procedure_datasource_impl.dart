@@ -1,5 +1,5 @@
 import 'package:learn_flutter/04_recipe/data/datasource/procedure_datasource.dart';
-import 'package:learn_flutter/04_recipe/data/model/procedure.dart';
+import 'package:learn_flutter/04_recipe/domain/model/procedure.dart';
 
 class ProcedureDatasourceImpl implements ProcedureDatasource {
   @override

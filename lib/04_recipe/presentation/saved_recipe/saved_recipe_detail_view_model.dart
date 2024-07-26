@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/01_widget_rule/data/model/ingrident.dart';
 import 'package:learn_flutter/04_recipe/core/result.dart';
-import 'package:learn_flutter/04_recipe/data/model/procedure.dart';
-import 'package:learn_flutter/04_recipe/data/repository/ingrident_repository.dart';
-import 'package:learn_flutter/04_recipe/data/repository/procedure_repository.dart';
+import 'package:learn_flutter/04_recipe/domain/model/procedure.dart';
+import 'package:learn_flutter/04_recipe/domain/repository/ingrident_repository.dart';
+import 'package:learn_flutter/04_recipe/domain/repository/procedure_repository.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_ui_state.dart';
 
 class SavedRecipeDetailViewModel with ChangeNotifier {

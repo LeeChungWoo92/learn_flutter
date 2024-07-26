@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter/04_recipe/presentation/component/input_field_search.dart';
-import 'package:learn_flutter/04_recipe/presentation/home/search_recipes_view_model.dart';
+import 'package:learn_flutter/04_recipe/presentation/search_recipe/search_recipes_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/component/recipe_card_widget.dart';
 
 import '../../../03_food_recipe_app/ui/fonts.dart';
@@ -43,7 +43,7 @@ class SearchRecipesScreen extends StatelessWidget {
     return ListenableBuilder(
       listenable: viewModel,
       builder: (BuildContext context, Widget? child) {
-        final recipes = viewModel.recipes;
+        final recipes = viewModel.state.recipe;
 
         if (recipes.isEmpty) {
           return const Center(
@@ -64,7 +64,7 @@ class SearchRecipesScreen extends StatelessWidget {
           itemCount: recipes.length,
           itemBuilder: (context, index) {
             final recipe = recipes[index];
-            if (viewModel.isLoading) {
+            if (viewModel.state.isLoading) {
               const Center(
                 child: CircularProgressIndicator(),
               );

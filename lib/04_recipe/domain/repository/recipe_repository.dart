@@ -3,6 +3,4 @@ import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
 
 abstract interface class RecipeRepository {
   Future<Result<List<Recipe>>> getRecipes();
-
-  Future<Result<List<Recipe>>> getSearchRecipes(String foodName);
 }

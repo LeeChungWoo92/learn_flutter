@@ -25,22 +25,18 @@ void diSetup() {
   getIt.registerSingleton<RecipeRepository>(RecipeRepositoryImpl(getIt()));
 
   getIt.registerSingleton<IngridentDatasource>(IngridentDatasourceImpl());
-  getIt
-      .registerSingleton<IngridentRepository>(IngridentRepositoryImpl(getIt()));
+  getIt.registerSingleton<IngridentRepository>(IngridentRepositoryImpl(getIt()));
 
   getIt.registerSingleton<ProcedureDatasource>(ProcedureDatasourceImpl());
-  getIt
-      .registerSingleton<ProcedureRepository>(ProcedureRepositoryImpl(getIt()));
+  getIt.registerSingleton<ProcedureRepository>(ProcedureRepositoryImpl(getIt()));
 
   getIt.registerSingleton(GetRecipeUseCase(getIt()));
   getIt.registerSingleton(SearchRecipeUseCase(getIt()));
 
-  getIt.registerFactory<SavedRecipesViewModel>(
-      () => SavedRecipesViewModel(getIt()));
+  getIt.registerFactory<SavedRecipesViewModel>(() => SavedRecipesViewModel(getIt()));
 
   getIt.registerFactory<SavedRecipeDetailViewModel>(
       () => SavedRecipeDetailViewModel(getIt(), getIt()));
 
-  getIt.registerFactory<SearchRecipesViewModel>(
-      () => SearchRecipesViewModel(getIt(), getIt()));
+  getIt.registerFactory<SearchRecipesViewModel>(() => SearchRecipesViewModel(getIt(), getIt()));
 }

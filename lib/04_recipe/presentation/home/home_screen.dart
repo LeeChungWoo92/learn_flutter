@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter/04_recipe/di/di_setup.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/home_content_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/notification/notification_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/profile/profile_screen.dart';
@@ -7,6 +8,7 @@ import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_s
 import '../../../router/router.dart';
 
 void main() {
+  diSetup();
   runApp(const MyApp());
 }
 

@@ -1,35 +1,17 @@
 import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/03_food_recipe_app/presentaion/sign_up/sign_up_screen.dart';
 import 'package:learn_flutter/03_food_recipe_app/presentaion/splash/splash_screen.dart';
-import 'package:learn_flutter/04_recipe/data/datasource/ingrident_datasource_impl.dart';
-import 'package:learn_flutter/04_recipe/data/datasource/procedure_datasource_impl.dart';
-import 'package:learn_flutter/04_recipe/data/repository/ingrident_repository_impl.dart';
-import 'package:learn_flutter/04_recipe/data/repository/procedure_repository_impl.dart';
 import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
-import 'package:learn_flutter/04_recipe/domain/use_case/get_recipe_use_case.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_view_model.dart';
+import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/search_recipe/search_recipes_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/search_recipe/search_recipes_view_model.dart';
-import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../04_recipe/data/datasource/recipe_datasource_impl.dart';
-import '../04_recipe/data/repository/recipe_repository_impl.dart';
-import '../04_recipe/domain/use_case/search_recipe_use_case.dart';
+import '../04_recipe/di/di_setup.dart';
 import '../04_recipe/presentation/home/home_screen.dart';
 import '../04_recipe/presentation/saved_recipe/saved_recipe_detail_screen.dart';
 import '../04_recipe/presentation/saved_recipe/saved_recipe_screen.dart';
-
-final _dataource = RecipeDatasourceImpl();
-final _repository = RecipeRepositoryImpl(_dataource);
-
-final _ingridentDatasource = IngridentDatasourceImpl();
-final _ingridentRepository = IngridentRepositoryImpl(_ingridentDatasource);
-
-final _procedureDatasource = ProcedureDatasourceImpl();
-final _procedureRepository = ProcedureRepositoryImpl(_procedureDatasource);
-final _getRecipeUseCase = GetRecipeUseCase(_repository);
-final _searchRecipeUseCase = SearchRecipeUseCase(_getRecipeUseCase);
 
 final router = GoRouter(
   initialLocation: '/sign_up',
@@ -37,33 +19,54 @@ final router = GoRouter(
     GoRoute(
       path: '/home',
       builder: (context, state) {
-        final viewModel = SavedRecipesViewModel(_getRecipeUseCase);
         return ChangeNotifierProvider<SavedRecipesViewModel>(
-          create: (context) => viewModel,
+          create: (_) => getIt<SavedRecipesViewModel>(),
           child: const HomeScreen(),
         );
       },
     ),
+    // Get it 사용 전 코드
+    // GoRoute(
+    //   path: '/saved_recipe',
+    //   builder: (context, state) {
+    //     final viewModel = SavedRecipesViewModel(_getRecipeUseCase);
+    //     return ChangeNotifierProvider<SavedRecipesViewModel>(
+    //       create: (context) => viewModel,
+    //       child: const SavedRecipeScreen(),
+    //     );
+    //   },
+    // ),
+
     GoRoute(
       path: '/saved_recipe',
       builder: (context, state) {
-        final viewModel = SavedRecipesViewModel(_getRecipeUseCase);
         return ChangeNotifierProvider<SavedRecipesViewModel>(
-          create: (context) => viewModel,
+          create: (_) => getIt<SavedRecipesViewModel>(),
           child: const SavedRecipeScreen(),
         );
       },
     ),
+    // Get it 사용 전 코드
+    // GoRoute(
+    //   path: '/recipe_detail',
+    //   builder: (context, state) {
+    //     final recipe = state.extra as Recipe;
+    //     final viewModel = SavedRecipeDetailViewModel(
+    //       _ingridentRepository,
+    //       _procedureRepository,
+    //     );
+    //     return ChangeNotifierProvider<SavedRecipeDetailViewModel>(
+    //       create: (context) => viewModel,
+    //       child: SavedRecipeDetailScreen(recipe: recipe),
+    //     );
+    //   },
+    // ),
     GoRoute(
       path: '/recipe_detail',
       builder: (context, state) {
         final recipe = state.extra as Recipe;
-        final viewModel = SavedRecipeDetailViewModel(
-          _ingridentRepository,
-          _procedureRepository,
-        );
         return ChangeNotifierProvider<SavedRecipeDetailViewModel>(
-          create: (context) => viewModel,
+          create: (_) => getIt<SavedRecipeDetailViewModel>(),
           child: SavedRecipeDetailScreen(recipe: recipe),
         );
       },
@@ -83,11 +86,10 @@ final router = GoRouter(
     GoRoute(
       path: '/search_recipes',
       builder: (context, state) {
-        final viewModel = SearchRecipesViewModel(
-          _getRecipeUseCase,
-          _searchRecipeUseCase,
+        return ChangeNotifierProvider<SearchRecipesViewModel>(
+          create: (_) => getIt<SearchRecipesViewModel>(),
+          child: const SearchRecipesScreen(),
         );
-        return SearchRecipesScreen(viewModel: viewModel);
       },
     ),
   ],

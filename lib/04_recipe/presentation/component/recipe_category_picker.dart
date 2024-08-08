@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter/04_recipe/presentation/home/home_content_view_model.dart';
+import 'package:provider/provider.dart';
 
-class RecipeCategoryPicker extends StatefulWidget {
-  const RecipeCategoryPicker({
-    super.key,
-  });
-
-  @override
-  State<RecipeCategoryPicker> createState() => _RecipeCategoryPickerState();
-}
-
-class _RecipeCategoryPickerState extends State<RecipeCategoryPicker> {
-  final List<String> _categories = ['All', 'Indian', 'Italian', 'Asian', 'Chinese'];
-  String _selectedCategory = 'All';
+class RecipeCategoryPicker extends StatelessWidget {
+  const RecipeCategoryPicker({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<HomeContentViewModel>();
+
     return SizedBox(
       height: 50,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: _categories.length,
+        itemCount: viewModel.categories.length,
         itemBuilder: (context, index) {
-          final category = _categories[index];
-          final isSelected = _selectedCategory == category;
+          final category = viewModel.categories[index];
+          final isSelected = viewModel.selectedCategory == category;
           return ChoiceChip(
             labelPadding: const EdgeInsets.symmetric(horizontal: 16),
             label: Text(
@@ -37,15 +31,13 @@ class _RecipeCategoryPickerState extends State<RecipeCategoryPicker> {
             showCheckmark: false,
             side: BorderSide.none,
             onSelected: (bool selected) {
-              setState(() {
-                _selectedCategory = category;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(_selectedCategory),
-                    duration: const Duration(seconds: 1),
-                  ),
-                );
-              });
+              viewModel.selectCategory(category);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(viewModel.selectedCategory),
+                  duration: const Duration(seconds: 1),
+                ),
+              );
             },
           );
         },

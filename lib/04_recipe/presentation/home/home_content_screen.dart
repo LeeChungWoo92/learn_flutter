@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/04_recipe/presentation/component/input_field_search.dart';
 import 'package:learn_flutter/03_food_recipe_app/ui/color_styles.dart';
 import 'package:learn_flutter/03_food_recipe_app/ui/fonts.dart';
+import 'package:learn_flutter/04_recipe/presentation/component/recipe_category_picker.dart';
 
 class HomeContentScreen extends StatelessWidget {
   const HomeContentScreen({super.key});
@@ -43,6 +44,8 @@ class HomeContentScreen extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
+            const RecipeCategoryPicker(),
           ],
         ),
       )),

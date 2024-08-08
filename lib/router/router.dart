@@ -2,6 +2,9 @@ import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/03_food_recipe_app/presentaion/sign_up/sign_up_screen.dart';
 import 'package:learn_flutter/03_food_recipe_app/presentaion/splash/splash_screen.dart';
 import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
+import 'package:learn_flutter/04_recipe/presentation/component/recipe_category_picker.dart';
+import 'package:learn_flutter/04_recipe/presentation/home/home_content_screen.dart';
+import 'package:learn_flutter/04_recipe/presentation/home/home_content_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/search_recipe/search_recipes_screen.dart';
@@ -36,6 +39,16 @@ final router = GoRouter(
     //     );
     //   },
     // ),
+
+    GoRoute(
+      path: '/home_content_screen',
+      builder: (context, state) {
+        return ChangeNotifierProvider<HomeContentViewModel>(
+          create: (_) => getIt<HomeContentViewModel>(),
+          child: const HomeContentScreen(),
+        );
+      },
+    ),
 
     GoRoute(
       path: '/saved_recipe',

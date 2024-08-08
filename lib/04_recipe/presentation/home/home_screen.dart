@@ -4,8 +4,10 @@ import 'package:learn_flutter/04_recipe/presentation/home/home_content_screen.da
 import 'package:learn_flutter/04_recipe/presentation/notification/notification_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/profile/profile_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../../router/router.dart';
+import 'home_content_view_model.dart';
 
 void main() {
   diSetup();
@@ -43,7 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
-      const HomeContentScreen(),
+      ChangeNotifierProvider<HomeContentViewModel>(
+        create: (context) => getIt(),
+        child: const HomeContentScreen(),
+      ),
       const SavedRecipeScreen(),
       const NotificationScreen(),
       const ProfileScreen(),

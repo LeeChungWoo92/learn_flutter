@@ -12,6 +12,8 @@ class Recipe with _$Recipe {
     required String chefName,
     required double grade,
     required String cookingTime,
+    @Default("Italian") String category,
+
   }) = _Recipe;
 
   factory Recipe.fromJson(Map<String, Object?> json) => _$RecipeFromJson(json);

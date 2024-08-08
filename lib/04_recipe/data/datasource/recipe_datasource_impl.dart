@@ -6,6 +6,7 @@ class RecipeDatasourceImpl implements RecipeDatasource {
   Future<List<Recipe>> getRecipes() async {
     return [
       const Recipe(
+        category: 'Asian',
         imageUrl:
             'https://cdn.pixabay.com/photo/2019/11/23/15/25/korea-food-4647402_1280.jpg',
         foodName: 'Samgyeobsal',
@@ -14,6 +15,7 @@ class RecipeDatasourceImpl implements RecipeDatasource {
         cookingTime: '25',
       ),
       const Recipe(
+        category: 'Chinese',
         imageUrl:
             'https://cdn.pixabay.com/photo/2020/04/26/22/32/black-bean-noodles-5097423_1280.jpg',
         foodName: 'Jajangmyeon',
@@ -22,6 +24,7 @@ class RecipeDatasourceImpl implements RecipeDatasource {
         cookingTime: '20',
       ),
       const Recipe(
+        category: 'Indian',
         imageUrl:
             'https://cdn.pixabay.com/photo/2020/10/11/05/06/chicken-5644762_1280.jpg',
         foodName: 'Chicken',
@@ -30,6 +33,7 @@ class RecipeDatasourceImpl implements RecipeDatasource {
         cookingTime: '35',
       ),
       const Recipe(
+        category: 'Chinese',
         imageUrl:
             'https://cdn.pixabay.com/photo/2018/12/03/01/04/spicy-seafood-3852529_1280.jpg',
         foodName: 'Jjambbong',
@@ -38,6 +42,7 @@ class RecipeDatasourceImpl implements RecipeDatasource {
         cookingTime: '15',
       ),
       const Recipe(
+        category: 'Asian',
         imageUrl:
             'https://cdn.pixabay.com/photo/2016/10/13/19/15/bibimbap-1738580_1280.jpg',
         foodName: 'Bibimbap',
@@ -46,6 +51,7 @@ class RecipeDatasourceImpl implements RecipeDatasource {
         cookingTime: '15',
       ),
       const Recipe(
+        category: 'Italian',
         imageUrl:
             'https://cdn.pixabay.com/photo/2024/04/23/09/32/ai-generated-8714517_1280.jpg',
         foodName: 'Pizza',
@@ -54,6 +60,7 @@ class RecipeDatasourceImpl implements RecipeDatasource {
         cookingTime: '30',
       ),
       const Recipe(
+        category: 'Asian',
         imageUrl:
         'https://cdn.pixabay.com/photo/2024/05/02/17/47/sushi-8735286_1280.jpg',
         foodName: 'Sushi',

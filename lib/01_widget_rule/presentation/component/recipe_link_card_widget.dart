@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../../../04_recipe/domain/model/recipe.dart';
+
 class RecipeLinkCardWidget extends StatelessWidget {
-  const RecipeLinkCardWidget({super.key});
+  final void Function() onClose;
+  final void Function() onCopyLink;
+  final Recipe recipe;
+
+  const RecipeLinkCardWidget({
+    super.key,
+    required this.onClose,
+    required this.onCopyLink,
+    required this.recipe,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +42,7 @@ class RecipeLinkCardWidget extends StatelessWidget {
                     Icons.close,
                     size: 14,
                   ),
-                  onPressed: () {},
+                  onPressed: onClose,
                 ),
               ],
             ),
@@ -53,9 +64,9 @@ class RecipeLinkCardWidget extends StatelessWidget {
                       color: Colors.grey[350],
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Text(
-                      'app.Recipe.co/jollof_rice',
-                      style: TextStyle(
+                    child: Text(
+                      'app.Recipe.co/${recipe.foodName}',
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black,
                       ),
@@ -64,9 +75,7 @@ class RecipeLinkCardWidget extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 ElevatedButton(
-                  onPressed: () {
-                    // Add copy link functionality here
-                  },
+                  onPressed: onCopyLink,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                     padding: const EdgeInsets.symmetric(

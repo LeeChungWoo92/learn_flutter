@@ -6,13 +6,17 @@ import 'package:learn_flutter/04_recipe/domain/repository/ingrident_repository.d
 import 'package:learn_flutter/04_recipe/domain/repository/procedure_repository.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_ui_state.dart';
 
+import '../../domain/use_case/copy_link_use_case.dart';
+
 class SavedRecipeDetailViewModel with ChangeNotifier {
   final IngridentRepository _ingridentRepository;
   final ProcedureRepository _procedureRepository;
+  final CopyLinkUseCase _copyLinkUseCase;
 
   SavedRecipeDetailViewModel(
     this._ingridentRepository,
     this._procedureRepository,
+    this._copyLinkUseCase,
   ) {
     getIngridents();
     getProcedures();
@@ -47,5 +51,9 @@ class SavedRecipeDetailViewModel with ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  void copyLink(String copyRecipeLink) async {
+    await _copyLinkUseCase.execute(copyRecipeLink);
   }
 }

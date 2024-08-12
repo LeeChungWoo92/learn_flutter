@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter/01_widget_rule/presentation/component/recipe_link_card_widget.dart';
 import 'package:learn_flutter/03_food_recipe_app/ui/color_styles.dart';
 import 'package:learn_flutter/03_food_recipe_app/ui/fonts.dart';
 import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
@@ -7,9 +8,12 @@ import 'package:learn_flutter/04_recipe/presentation/component/procedure_item_wi
 import 'package:learn_flutter/04_recipe/presentation/component/profile_widget.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/component/recipe_card_widget.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_view_model.dart';
+import 'package:learn_flutter/04_recipe/ui/snack_bar_utils.dart';
 import 'package:provider/provider.dart';
 
 import '../../../01_widget_rule/data/model/profile.dart';
+
+enum PopUpItem { share, rate, review, bookmark }
 
 class SavedRecipeDetailScreen extends StatefulWidget {
   final Recipe recipe;
@@ -20,14 +24,12 @@ class SavedRecipeDetailScreen extends StatefulWidget {
   });
 
   @override
-  State<SavedRecipeDetailScreen> createState() =>
-      _SavedRecipeDetailScreenState();
+  State<SavedRecipeDetailScreen> createState() => _SavedRecipeDetailScreenState();
 }
 
 class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
   static const profile = Profile(
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2020/06/25/16/25/micky-mouse-5340128_1280.jpg',
+    imageUrl: 'https://cdn.pixabay.com/photo/2020/06/25/16/25/micky-mouse-5340128_1280.jpg',
     name: '미키마우스',
     locationName: 'Lagos,Nigeria',
   );
@@ -40,6 +42,8 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
     });
   }
 
+  PopUpItem? selectedItem;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,9 +54,53 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Hero(
-                  tag: widget.recipe.imageUrl,
-                  child: RecipeCardWidget(recipe: widget.recipe)),
+              Align(
+                alignment: Alignment.centerRight,
+                child: PopupMenuButton<PopUpItem>(
+                  color: Colors.white,
+                  icon: const Icon(Icons.more_horiz),
+                  initialValue: selectedItem,
+                  onSelected: (PopUpItem item) {
+                    setState(() {
+                      selectedItem = item;
+                      if (selectedItem == PopUpItem.share) {
+                        showRecipeLinkDialog(context);
+                      }
+                    });
+                  },
+                  itemBuilder: (BuildContext context) => <PopupMenuEntry<PopUpItem>>[
+                    const PopupMenuItem<PopUpItem>(
+                      value: PopUpItem.share,
+                      child: ListTile(
+                        leading: Icon(Icons.share),
+                        title: Text('share'),
+                      ),
+                    ),
+                    const PopupMenuItem<PopUpItem>(
+                      value: PopUpItem.rate,
+                      child: ListTile(
+                        leading: Icon(Icons.star),
+                        title: Text('Rate Recipe'),
+                      ),
+                    ),
+                    const PopupMenuItem<PopUpItem>(
+                      value: PopUpItem.review,
+                      child: ListTile(
+                        leading: Icon(Icons.message),
+                        title: Text('Review'),
+                      ),
+                    ),
+                    const PopupMenuItem<PopUpItem>(
+                      value: PopUpItem.bookmark,
+                      child: ListTile(
+                        leading: Icon(Icons.bookmark),
+                        title: Text('Unsave'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Hero(tag: widget.recipe.imageUrl, child: RecipeCardWidget(recipe: widget.recipe)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -77,10 +125,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
                 ],
               ),
               const SizedBox(height: 10),
-              ProfileWidget(
-                  profile: profile,
-                  onFollowTap: toggleFollow,
-                  isFollow: isFollow),
+              ProfileWidget(profile: profile, onFollowTap: toggleFollow, isFollow: isFollow),
               const SizedBox(height: 8),
               tabBar(),
             ],
@@ -118,7 +163,6 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
                   height: 33,
                 ),
               ],
-
               dividerColor: Colors.transparent,
               indicator: BoxDecoration(
                 color: ColorStyles.primary100Color,
@@ -127,7 +171,6 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
               indicatorSize: TabBarIndicatorSize.tab,
               indicatorPadding: const EdgeInsets.symmetric(vertical: 8),
               labelColor: ColorStyles.whiteColor,
-              // 선택된 탭의 텍스트 색상
               unselectedLabelColor: ColorStyles.primary80Color,
             ),
           ),
@@ -238,5 +281,24 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
         ),
       ],
     );
+  }
+
+  void showRecipeLinkDialog(BuildContext context) async {
+    final viewModel = context.read<SavedRecipeDetailViewModel>();
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Center(
+              child: RecipeLinkCardWidget(
+            onCopyLink: () {
+              viewModel.copyLink(widget.recipe.foodName);
+              SnackBarUtils.showLinkCopiedSnackBar(context, 'Link Copied');
+            },
+            onClose: () {
+              Navigator.pop(context);
+            },
+            recipe: widget.recipe,
+          ));
+        });
   }
 }

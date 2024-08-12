@@ -47,59 +47,59 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          PopupMenuButton<PopUpItem>(
+            color: Colors.white,
+            icon: const Icon(Icons.more_horiz),
+            initialValue: selectedItem,
+            onSelected: (PopUpItem item) {
+              setState(() {
+                selectedItem = item;
+                if (selectedItem == PopUpItem.share) {
+                  showRecipeLinkDialog(context);
+                }
+              });
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<PopUpItem>>[
+              const PopupMenuItem<PopUpItem>(
+                value: PopUpItem.share,
+                child: ListTile(
+                  leading: Icon(Icons.share),
+                  title: Text('share'),
+                ),
+              ),
+              const PopupMenuItem<PopUpItem>(
+                value: PopUpItem.rate,
+                child: ListTile(
+                  leading: Icon(Icons.star),
+                  title: Text('Rate Recipe'),
+                ),
+              ),
+              const PopupMenuItem<PopUpItem>(
+                value: PopUpItem.review,
+                child: ListTile(
+                  leading: Icon(Icons.message),
+                  title: Text('Review'),
+                ),
+              ),
+              const PopupMenuItem<PopUpItem>(
+                value: PopUpItem.bookmark,
+                child: ListTile(
+                  leading: Icon(Icons.bookmark),
+                  title: Text('Unsave'),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: PopupMenuButton<PopUpItem>(
-                  color: Colors.white,
-                  icon: const Icon(Icons.more_horiz),
-                  initialValue: selectedItem,
-                  onSelected: (PopUpItem item) {
-                    setState(() {
-                      selectedItem = item;
-                      if (selectedItem == PopUpItem.share) {
-                        showRecipeLinkDialog(context);
-                      }
-                    });
-                  },
-                  itemBuilder: (BuildContext context) => <PopupMenuEntry<PopUpItem>>[
-                    const PopupMenuItem<PopUpItem>(
-                      value: PopUpItem.share,
-                      child: ListTile(
-                        leading: Icon(Icons.share),
-                        title: Text('share'),
-                      ),
-                    ),
-                    const PopupMenuItem<PopUpItem>(
-                      value: PopUpItem.rate,
-                      child: ListTile(
-                        leading: Icon(Icons.star),
-                        title: Text('Rate Recipe'),
-                      ),
-                    ),
-                    const PopupMenuItem<PopUpItem>(
-                      value: PopUpItem.review,
-                      child: ListTile(
-                        leading: Icon(Icons.message),
-                        title: Text('Review'),
-                      ),
-                    ),
-                    const PopupMenuItem<PopUpItem>(
-                      value: PopUpItem.bookmark,
-                      child: ListTile(
-                        leading: Icon(Icons.bookmark),
-                        title: Text('Unsave'),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Hero(tag: widget.recipe.imageUrl, child: RecipeCardWidget(recipe: widget.recipe)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -293,6 +293,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
             onCopyLink: () {
               viewModel.copyLink(widget.recipe.foodName);
               SnackBarUtils.showLinkCopiedSnackBar(context, 'Link Copied');
+              Navigator.pop(context);
             },
             onClose: () {
               Navigator.pop(context);

@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/03_food_recipe_app/presentaion/sign_up/sign_up_screen.dart';
 import 'package:learn_flutter/03_food_recipe_app/presentaion/splash/splash_screen.dart';
 import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
-import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/search_recipe/search_recipes_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/search_recipe/search_recipes_view_model.dart';
@@ -10,7 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../04_recipe/di/di_setup.dart';
 import '../04_recipe/presentation/home/home_screen.dart';
-import '../04_recipe/presentation/saved_recipe/saved_recipe_detail_screen.dart';
+import '../04_recipe/presentation/saved_recipe/saved_recipe_detail_screen_root.dart';
 import '../04_recipe/presentation/saved_recipe/saved_recipe_screen.dart';
 
 final router = GoRouter(
@@ -65,10 +64,7 @@ final router = GoRouter(
       path: '/recipe_detail',
       builder: (context, state) {
         final recipe = state.extra as Recipe;
-        return ChangeNotifierProvider<SavedRecipeDetailViewModel>(
-          create: (_) => getIt<SavedRecipeDetailViewModel>(),
-          child: SavedRecipeDetailScreen(recipe: recipe),
-        );
+        return SavedRecipeDetailScreenRoot(recipe: recipe);
       },
     ),
     GoRoute(

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:learn_flutter/04_recipe/presentation/component/input_field_search.dart';
 import 'package:learn_flutter/03_food_recipe_app/ui/color_styles.dart';
 import 'package:learn_flutter/03_food_recipe_app/ui/fonts.dart';
+import 'package:learn_flutter/04_recipe/presentation/component/input_field_search.dart';
 import 'package:learn_flutter/04_recipe/presentation/component/recipe_category_item_widget.dart';
 import 'package:learn_flutter/04_recipe/presentation/component/recipe_category_picker.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/home_content_view_model.dart';
@@ -13,6 +14,7 @@ class HomeContentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String environment = GetIt.instance<String>();
     final viewModel = context.watch<HomeContentViewModel>();
     return SafeArea(
       child: Scaffold(
@@ -26,7 +28,7 @@ class HomeContentScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hello Jega',
+              'Hello $environment',
               style: Fonts.largeTextBold,
             ),
             const SizedBox(height: 5),
@@ -73,15 +75,14 @@ class HomeContentScreen extends StatelessWidget {
         itemCount: recipes.length,
         itemBuilder: (context, index) {
           final recipe = recipes[index];
-          if(recipes.isEmpty) {
+          if (recipes.isEmpty) {
             return Text('없음');
-          }else {
+          } else {
             return SizedBox(
               width: 180,
               child: RecipeCategoryItemWidget(recipe: recipe),
             );
           }
-
         },
       ),
     );

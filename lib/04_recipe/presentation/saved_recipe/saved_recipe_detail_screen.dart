@@ -9,7 +9,6 @@ import 'package:learn_flutter/04_recipe/presentation/component/profile_widget.da
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/component/recipe_card_widget.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_view_model.dart';
 import 'package:learn_flutter/04_recipe/ui/snack_bar_utils.dart';
-import 'package:provider/provider.dart';
 
 import '../../../01_widget_rule/data/model/profile.dart';
 
@@ -17,10 +16,12 @@ enum PopUpItem { share, rate, review, bookmark }
 
 class SavedRecipeDetailScreen extends StatefulWidget {
   final Recipe recipe;
+  final SavedRecipeDetailViewModel viewModel;
 
   const SavedRecipeDetailScreen({
     super.key,
     required this.recipe,
+    required this.viewModel,
   });
 
   @override
@@ -190,8 +191,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
   }
 
   Widget ingredientList() {
-    final viewModel = context.watch<SavedRecipeDetailViewModel>();
-    final ingridents = viewModel.state.ingrident;
+    final ingridents = widget.viewModel.state.ingrident;
 
     return Column(
       children: [
@@ -208,7 +208,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
                     )),
               ],
             ),
-            Text('${viewModel.state.ingrident.length} Items',
+            Text('${widget.viewModel.state.ingrident.length} Items',
                 style: Fonts.smallerTextRegular.copyWith(
                   color: ColorStyles.gray3Color,
                 )),
@@ -220,7 +220,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
             itemCount: ingridents.length,
             itemBuilder: (context, index) {
               final ingrident = ingridents[index];
-              if (viewModel.state.isLoading) {
+              if (widget.viewModel.state.isLoading) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
@@ -237,8 +237,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
   }
 
   Widget proceduretList() {
-    final viewModel = context.watch<SavedRecipeDetailViewModel>();
-    final procedures = viewModel.state.procedure;
+    final procedures = widget.viewModel.state.procedure;
 
     return Column(
       children: [
@@ -255,7 +254,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
                     )),
               ],
             ),
-            Text('${viewModel.state.procedure.length} Steps',
+            Text('${widget.viewModel.state.procedure.length} Steps',
                 style: Fonts.smallerTextRegular.copyWith(
                   color: ColorStyles.gray3Color,
                 )),
@@ -267,7 +266,7 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
             itemCount: procedures.length,
             itemBuilder: (context, index) {
               final procedure = procedures[index];
-              if (viewModel.state.isLoading) {
+              if (widget.viewModel.state.isLoading) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
@@ -284,14 +283,13 @@ class _SavedRecipeDetailScreenState extends State<SavedRecipeDetailScreen> {
   }
 
   void showRecipeLinkDialog(BuildContext context) async {
-    final viewModel = context.read<SavedRecipeDetailViewModel>();
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return Center(
               child: RecipeLinkCardWidget(
             onCopyLink: () {
-              viewModel.copyLink(widget.recipe.foodName);
+              widget.viewModel.copyLink(widget.recipe.foodName);
               SnackBarUtils.showLinkCopiedSnackBar(context, 'Link Copied');
               Navigator.pop(context);
             },

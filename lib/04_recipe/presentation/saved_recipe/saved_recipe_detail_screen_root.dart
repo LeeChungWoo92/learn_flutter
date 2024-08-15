@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:learn_flutter/04_recipe/di/di_setup.dart';
 import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_screen.dart';
-import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_detail_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +19,10 @@ class SavedRecipeDetailScreenRoot extends StatelessWidget {
       create: (_) => getIt<SavedRecipeDetailViewModel>(),
       child: Consumer<SavedRecipeDetailViewModel>(
         builder: (context, viewModel, child) {
-          return SavedRecipeDetailScreen(recipe: recipe);
+          return SavedRecipeDetailScreen(
+            recipe: recipe,
+            viewModel: viewModel,
+          );
         },
       ),
     );

@@ -3,7 +3,7 @@ import 'package:learn_flutter/04_recipe/di/di_setup.dart';
 import 'package:learn_flutter/04_recipe/presentation/home/home_content_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/notification/notification_screen.dart';
 import 'package:learn_flutter/04_recipe/presentation/profile/profile_screen.dart';
-import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_screen.dart';
+import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_screen_root.dart';
 import 'package:provider/provider.dart';
 
 import '../../../router/router.dart';
@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         create: (context) => getIt(),
         child: const HomeContentScreen(),
       ),
-      const SavedRecipeScreen(),
+      const SavedRecipeScreenRoot(),
       const NotificationScreen(),
       const ProfileScreen(),
     ];

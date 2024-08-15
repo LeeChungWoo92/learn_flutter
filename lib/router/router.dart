@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import '../04_recipe/di/di_setup.dart';
 import '../04_recipe/presentation/home/home_screen.dart';
 import '../04_recipe/presentation/saved_recipe/saved_recipe_detail_screen_root.dart';
-import '../04_recipe/presentation/saved_recipe/saved_recipe_screen.dart';
+import '../04_recipe/presentation/saved_recipe/saved_recipe_screen_root.dart';
 
 final router = GoRouter(
   initialLocation: '/sign_up',
@@ -24,42 +24,12 @@ final router = GoRouter(
         );
       },
     ),
-    // Get it 사용 전 코드
-    // GoRoute(
-    //   path: '/saved_recipe',
-    //   builder: (context, state) {
-    //     final viewModel = SavedRecipesViewModel(_getRecipeUseCase);
-    //     return ChangeNotifierProvider<SavedRecipesViewModel>(
-    //       create: (context) => viewModel,
-    //       child: const SavedRecipeScreen(),
-    //     );
-    //   },
-    // ),
-
     GoRoute(
       path: '/saved_recipe',
       builder: (context, state) {
-        return ChangeNotifierProvider<SavedRecipesViewModel>(
-          create: (_) => getIt<SavedRecipesViewModel>(),
-          child: const SavedRecipeScreen(),
-        );
+        return const SavedRecipeScreenRoot();
       },
     ),
-    // Get it 사용 전 코드
-    // GoRoute(
-    //   path: '/recipe_detail',
-    //   builder: (context, state) {
-    //     final recipe = state.extra as Recipe;
-    //     final viewModel = SavedRecipeDetailViewModel(
-    //       _ingridentRepository,
-    //       _procedureRepository,
-    //     );
-    //     return ChangeNotifierProvider<SavedRecipeDetailViewModel>(
-    //       create: (context) => viewModel,
-    //       child: SavedRecipeDetailScreen(recipe: recipe),
-    //     );
-    //   },
-    // ),
     GoRoute(
       path: '/recipe_detail',
       builder: (context, state) {

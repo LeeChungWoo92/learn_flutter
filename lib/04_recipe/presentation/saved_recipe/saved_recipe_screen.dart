@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/component/recipe_card_widget.dart';
-import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_ui_state.dart';
 
 import '../../../03_food_recipe_app/ui/fonts.dart';
 
 class SavedRecipeScreen extends StatelessWidget {
+  final SavedRecipesUiState state;
+
   const SavedRecipeScreen({
     super.key,
+    required this.state,
   });
 
   @override
@@ -32,13 +34,12 @@ class SavedRecipeScreen extends StatelessWidget {
   }
 
   Widget recipeList(BuildContext context) {
-    final viewModel = context.watch<SavedRecipesViewModel>();
-    final recipes = viewModel.state.recipe;
+    final recipes = state.recipe;
     return ListView.builder(
       itemCount: recipes.length,
       itemBuilder: (context, index) {
         final recipe = recipes[index];
-        if (viewModel.state.isLoading) {
+        if (state.isLoading) {
           const Center(
             child: CircularProgressIndicator(),
           );
@@ -47,8 +48,7 @@ class SavedRecipeScreen extends StatelessWidget {
             onTap: () {
               context.push('/recipe_detail', extra: recipe);
             },
-            child: Hero(
-                tag: recipe.imageUrl, child: RecipeCardWidget(recipe: recipe)));
+            child: Hero(tag: recipe.imageUrl, child: RecipeCardWidget(recipe: recipe)));
       },
     );
   }

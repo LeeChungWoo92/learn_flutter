@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:learn_flutter/04_recipe/data/datasource/procedure_datasource.dart';
 import 'package:learn_flutter/04_recipe/domain/model/procedure.dart';
 
+@Singleton(as: ProcedureDatasource)
 class ProcedureDatasourceImpl implements ProcedureDatasource {
   @override
   Future<List<Procedure>> getProcedures() async {

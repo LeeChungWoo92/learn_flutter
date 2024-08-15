@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:learn_flutter/04_recipe/data/datasource/recipe_datasource.dart';
 import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
 
+@Singleton(as: RecipeDatasource)
 class RecipeDatasourceImpl implements RecipeDatasource {
   @override
   Future<List<Recipe>> getRecipes() async {

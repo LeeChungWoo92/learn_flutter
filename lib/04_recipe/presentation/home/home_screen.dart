@@ -10,7 +10,7 @@ import '../../../router/router.dart';
 import 'home_content_view_model.dart';
 
 void main() {
-  diSetup();
+  configureDependencies();
   runApp(const MyApp());
 }
 

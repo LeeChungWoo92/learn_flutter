@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
 import 'package:learn_flutter/04_recipe/core/result.dart';
 import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
 
 import 'get_recipe_use_case.dart';
 
+@singleton
 class GetCategoryRecipeUseCase {
   final GetRecipeUseCase _getRecipeUseCase;
 

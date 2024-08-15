@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:learn_flutter/01_widget_rule/data/model/ingrident.dart';
 import 'package:learn_flutter/04_recipe/core/result.dart';
 import 'package:learn_flutter/04_recipe/domain/model/procedure.dart';
@@ -8,6 +9,7 @@ import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipe_d
 
 import '../../domain/use_case/copy_link_use_case.dart';
 
+@injectable
 class SavedRecipeDetailViewModel with ChangeNotifier {
   final IngridentRepository _ingridentRepository;
   final ProcedureRepository _procedureRepository;

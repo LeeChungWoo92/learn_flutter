@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:learn_flutter/04_recipe/data/datasource/ingrident_datasource.dart';
 import 'package:learn_flutter/01_widget_rule/data/model/ingrident.dart';
 
+@Singleton(as: IngridentDatasource)
 class IngridentDatasourceImpl implements IngridentDatasource {
   @override
   Future<List<Ingrident>> getIngridents() async {

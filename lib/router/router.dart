@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/03_food_recipe_app/presentaion/sign_up/sign_up_screen.dart';
-import 'package:learn_flutter/03_food_recipe_app/presentaion/splash/splash_screen.dart';
 import 'package:learn_flutter/04_recipe/domain/model/recipe.dart';
 import 'package:learn_flutter/04_recipe/presentation/saved_recipe/saved_recipes_view_model.dart';
 import 'package:learn_flutter/04_recipe/presentation/search_recipe/search_recipes_screen.dart';
@@ -11,9 +10,10 @@ import '../04_recipe/di/di_setup.dart';
 import '../04_recipe/presentation/home/home_screen.dart';
 import '../04_recipe/presentation/saved_recipe/saved_recipe_detail_screen_root.dart';
 import '../04_recipe/presentation/saved_recipe/saved_recipe_screen_root.dart';
+import '../04_recipe/presentation/splash/splash_screen.dart';
 
 final router = GoRouter(
-  initialLocation: '/sign_up',
+  initialLocation: '/splash',
   routes: [
     GoRoute(
       path: '/home',

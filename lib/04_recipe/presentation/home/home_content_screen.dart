@@ -14,7 +14,7 @@ class HomeContentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String environment = GetIt.instance<String>();
+    //final String environment = GetIt.instance<String>();
     final viewModel = context.watch<HomeContentViewModel>();
     return SafeArea(
       child: Scaffold(
@@ -28,7 +28,7 @@ class HomeContentScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hello $environment',
+              'Hello Jega',
               style: Fonts.largeTextBold,
             ),
             const SizedBox(height: 5),
